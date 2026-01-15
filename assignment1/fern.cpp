@@ -6,8 +6,14 @@
 using std::cout;
 using std::endl;
 
-const int  width = 128;
-const int  height = 150;
+
+#ifndef width
+const int width = 128;
+#endif
+
+#ifndef height
+const int height = 150;
+#endif
 const double xMax = 2.75;
 const double yMax = 10.1;
 
