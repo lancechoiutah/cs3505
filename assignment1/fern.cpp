@@ -27,6 +27,53 @@ bool getPixel(int row, int col, unsigned char* image);
 void drawImage(unsigned char* image);
 
 int main(){
-    
+
 }
 
+void performIterations(int iterations, unsigned char* image) {
+    double x = 0.0;
+    double y = 0.0;
+
+    for (int i = 0; i < iterations; ++i) {
+        int tIndex = selectTransformation();
+        applyTransformation(x, y, transformations[tIndex]);
+        setPixel(x, y, image);
+    }
+}
+
+int selectTransformation() {
+    int randNum = rand() % 100;
+    if (randNum == 0) {
+        return 0;
+    } else if (randNum < 8) {
+        return 1;
+    } else if (randNum < 15) {
+        return 2;
+    } else {
+        return 3;
+    }
+}
+
+void applyTransformation(double& x, double& y, const double* trans) {
+    double nextX = trans[0] * x + trans[1] * y + trans[4];
+    double nextY = trans[2] * x + trans[3] * y + trans[5];
+    x = nextX;
+    y = nextY;
+}
+
+void setPixel(double x, double y, unsigned char* image) {
+    int pixelX = (int)((width - 1) / 2 * (1 + x / xMax));
+    int pixelY = (int)((height - 1) * (1 - y / yMax));
+
+    if (pixelX < 0 || pixelX >= width || pixelY < 0 || pixelY >= height) {
+        return;
+    }
+}
+
+bool getPixel(int row, int col, unsigned char* image) {
+    // Fallback
+}
+
+void drawImage(unsigned char* image){
+
+}
